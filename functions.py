@@ -1,8 +1,12 @@
 import json
 import io
+import sqlite3
 
 with io.open("compounds.json", 'r', encoding='utf-8-sig') as data:
     dictionary = json.load(data)
+
+conn = sqlite3.connect('json.db')
+print ("Opened database successfully")
 
 rows = []
 rows2 = []
@@ -17,6 +21,11 @@ for field in dictionary:
         field["image"]
     ))
 
+    cursor = conn.cursor()
+    cursor.execute('''INSERT INTO compounds (compound_id, smiles, molecular_weight, ALogP, molecular_formula, num_rings, image) VALUES (?,?,?,?,?,?,?)''', (field["compound_id"], field["smiles"], field["molecular_weight"], field["ALogP"], field["molecular_formula"], field["num_rings"], field["image"]))
+    print("Insert done")
+    conn.commit()
+
     for assay in range(len(field["assay_results"])):
         rows2.append((
             field["compound_id"],
@@ -29,6 +38,10 @@ for field in dictionary:
             ))
 
 #print(rows)
-print(rows2)
+#print(rows2)
+
+
+
+
 
 

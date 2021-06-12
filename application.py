@@ -18,5 +18,5 @@ def after_request(response):
     return response
 
 #Connect to the db
-    conn = sqlite3.connect('events.db')
+    conn = sqlite3.connect('.db')
         print ("Opened database successfully")
