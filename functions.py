@@ -35,10 +35,15 @@ for field in dictionary:
             field["assay_results"][assay].get("operator"),
             field["assay_results"][assay].get("value"),
             field["assay_results"][assay].get("unit")
-            ))
+        ))
 
-#print(rows)
-#print(rows2)
+        cursor = conn.cursor()
+        cursor.execute('''INSERT INTO assay_results (compound_id, result_id, target, result, operator, value, unit) VALUES (?,?,?,?,?,?,?)''', (field["compound_id"], field["assay_results"][assay].get("result_id"), field["assay_results"][assay].get("target"), field["assay_results"][assay].get("result"), field["assay_results"][assay].get("operator"), field["assay_results"][assay].get("value"), field["assay_results"][assay].get("unit")))
+        print("Insert done")
+        conn.commit()
+
+print(rows)
+print(rows2)
 
 
 
