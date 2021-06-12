@@ -14,10 +14,16 @@ for field in dictionary:
         field["ALogP"],
         field["molecular_formula"],
         field["num_rings"],
-        field["image"],
-        field["assay_results"]
+        field["image"]
     ))
 
+    for assay in range(len(field["assay_results"])):
+        rows2.append((
+            field["compound_id"],
+            field["assay_results"][assay]
+            ))
 
 print(rows)
+#print(rows2)
+
 
