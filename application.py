@@ -1,6 +1,6 @@
+from flask import Flask, redirect, render_template, request, jsonify
+import os
 import sqlite3
-from flask import Flask, redirect, render_template, request
-import json
 
 # Configure application
 app = Flask(__name__)
@@ -17,6 +17,27 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-#Connect to the db
-    conn = sqlite3.connect('.db')
+
+@app.route("/compounds", methods = ["GET"])
+def index():
+
+    if request.method == "GET":
+
+        conn = sqlite3.connect('json.db')
         print ("Opened database successfully")
+
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM compounds")
+        allCompounds = cursor.fetchall()
+        result = []
+        column = [desc[0] for desc in cursor.description]
+        for compound in allCompounds:
+            compound = dict(zip(column, compound))
+            result.append(compound)
+        conn.close()
+        print(result)
+        return jsonify(result)
+
+
+#@app.route("/getCompounds/<int:num>/", methods = ["GET"])
+#def index():

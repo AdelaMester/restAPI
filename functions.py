@@ -42,8 +42,8 @@ for field in dictionary:
         print("Insert done")
         conn.commit()
 
-print(rows)
-print(rows2)
+#print(rows)
+#print(rows2)
 
 
 
