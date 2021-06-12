@@ -20,10 +20,15 @@ for field in dictionary:
     for assay in range(len(field["assay_results"])):
         rows2.append((
             field["compound_id"],
-            field["assay_results"][assay]
+            field["assay_results"][assay].get("result_id"),
+            field["assay_results"][assay].get("target"),
+            field["assay_results"][assay].get("result"),
+            field["assay_results"][assay].get("operator"),
+            field["assay_results"][assay].get("value"),
+            field["assay_results"][assay].get("unit")
             ))
 
-print(rows)
-#print(rows2)
+#print(rows)
+print(rows2)
 
 
