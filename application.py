@@ -1,16 +1,11 @@
 from flask import Flask, request, jsonify
 import os
 import sqlite3
-from flask_restplus import Api, Resource
-
+from flask_restx import Api, Resource
 
 # Configure application and Api
 app = Flask(__name__)
-api = Api(app)
-#namespace = api.namespace('compounds', description = 'compounds operations')
-#namespace=Namespace('hello_world','Hello World related operations')
-
-
+api = Api(app, version='1.0', title='Exscentia API',description="The v1.0 Compound API")
 
 @api.route('/compounds')
 class Compounds(Resource):
