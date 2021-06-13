@@ -2,13 +2,8 @@ from flask import Flask, request, jsonify
 import os
 import sqlite3
 #from werkzeug.utils import cached_property
+from flask_restplus import Api, Resource
 
-try:
-    from flask_restplus import Api, Resource
-except ImportError:
-    import werkzeug
-    werkzeug.cached_property = werkzeug.utils.cached_property
-    from flask_restplus import Api, Resource
 
 # Configure application and Api
 app = Flask(__name__)
