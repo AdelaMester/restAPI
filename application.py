@@ -13,7 +13,9 @@ except ImportError:
 # Configure application and Api
 app = Flask(__name__)
 api = Api(app)
-#ns_conf = api.namespace('compounds', description = 'compounds operations')
+#namespace = api.namespace('compounds', description = 'compounds operations')
+#namespace=Namespace('hello_world','Hello World related operations')
+
 
 
 @api.route('/compounds')
