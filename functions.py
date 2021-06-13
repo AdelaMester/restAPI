@@ -22,7 +22,7 @@ for field in dictionary:
     ))
 
     cursor = conn.cursor()
-    cursor.execute('''INSERT INTO compounds (compound_id, smiles, molecular_weight, ALogP, molecular_formula, num_rings, image) VALUES (?,?,?,?,?,?,?)''', (field["compound_id"], field["smiles"], field["molecular_weight"], field["ALogP"], field["molecular_formula"], field["num_rings"], field["image"]))
+    cursor.execute("INSERT INTO compounds (compound_id, smiles, molecular_weight, ALogP, molecular_formula, num_rings, image) VALUES (?,?,?,?,?,?,?)", (field["compound_id"], field["smiles"], field["molecular_weight"], field["ALogP"], field["molecular_formula"], field["num_rings"], field["image"]))
     print("Insert done")
     conn.commit()
 
@@ -38,7 +38,7 @@ for field in dictionary:
         ))
 
         cursor = conn.cursor()
-        cursor.execute('''INSERT INTO assay_results (compound_id, result_id, target, result, operator, value, unit) VALUES (?,?,?,?,?,?,?)''', (field["compound_id"], field["assay_results"][assay].get("result_id"), field["assay_results"][assay].get("target"), field["assay_results"][assay].get("result"), field["assay_results"][assay].get("operator"), field["assay_results"][assay].get("value"), field["assay_results"][assay].get("unit")))
+        cursor.execute("INSERT INTO assay_results (compound_id, result_id, target, result, operator, value, unit) VALUES (?,?,?,?,?,?,?)", (field["compound_id"], field["assay_results"][assay].get("result_id"), field["assay_results"][assay].get("target"), field["assay_results"][assay].get("result"), field["assay_results"][assay].get("operator"), field["assay_results"][assay].get("value"), field["assay_results"][assay].get("unit")))
         print("Insert done")
         conn.commit()
 

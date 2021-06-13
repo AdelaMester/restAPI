@@ -2,26 +2,25 @@ from flask import Flask, request, jsonify
 import os
 import sqlite3
 
-# Configure application
+
+try:
+    from flask_restplus import Api, Resource
+except ImportError:
+    import werkzeug
+    werkzeug.cached_property = werkzeug.utils.cached_property
+    from flask_restplus import Api, Resource
+
+# Configure application and Api
 app = Flask(__name__)
-
-# Ensure templates are auto-reloaded
-app.config["TEMPLATES_AUTO_RELOAD"] = True
-
-
-# Ensure responses aren't cached
-@app.after_request
-def after_request(response):
-    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    response.headers["Expires"] = 0
-    response.headers["Pragma"] = "no-cache"
-    return response
+api = Api(app)
+#ns_conf = api.namespace('compounds', description = 'compounds operations')
 
 
-@app.route("/compounds", methods = ["GET"])
-def index():
+@api.route('/compounds')
+class Compounds(Resource):
+    def get(self):
 
-    if request.method == "GET":
+        """Returns the list of compounds"""
 
         conn = sqlite3.connect('json.db')
         print ("Opened database successfully")
@@ -38,6 +37,46 @@ def index():
         print(result)
         return jsonify(result)
 
+    def post(self):
+        compound_id = request.json['compound_id']
+        smiles = request.json['smiles']
+        molecular_weight = request.json['molecular_weight']
+        ALogP = request.json['ALogP']
+        molecular_formula = request.json['molecular_formula']
+        num_rings = request.json['num_rings']
+        image = request.json['image']
 
-#@app.route("/getCompounds/<int:num>/", methods = ["GET"])
-#def index():
+        conn = sqlite3.connect('json.db')
+        print ("Opened database successfully")
+
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO compounds (compound_id, smiles, molecular_weight, ALogP, molecular_formula, num_rings, image) VALUES (?,?,?,?,?,?,?)", (compound_id, smiles, molecular_weight, ALogP, molecular_formula, num_rings, image))
+        allCompounds = cursor.fetchall()
+        conn.commit()
+        print("New compound created")
+        return jsonify("Insert done")
+
+
+@api.route("/compounds/<int:num>/")
+@api.doc(params = {'num': 'A compound id'})
+class Compounds_id(Resource):
+    def get(self, num):
+        conn = sqlite3.connect('json.db')
+        print ("Opened database successfully")
+
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM assay_results WHERE compound_id = ?", (num,))
+        allAssayResults = cursor.fetchall()
+        result = []
+        column = [desc[0] for desc in cursor.description]
+        for assay_result in allAssayResults:
+            assay_result = dict(zip(column, assay_result))
+            result.append(assay_result)
+        conn.close()
+        print(result)
+        return jsonify(result)
+
+
+
+
+
