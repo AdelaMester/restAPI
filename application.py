@@ -38,6 +38,9 @@ class Compounds(Resource):
         return jsonify(result)
 
     def post(self):
+
+        """Creates a compound"""
+
         compound_id = request.json['compound_id']
         smiles = request.json['smiles']
         molecular_weight = request.json['molecular_weight']
@@ -57,10 +60,36 @@ class Compounds(Resource):
         return jsonify("Insert done")
 
 
-@api.route("/compounds/<int:num>/")
+@api.route("/compound/<int:num>")
 @api.doc(params = {'num': 'A compound id'})
 class Compounds_id(Resource):
     def get(self, num):
+
+        """Returns the details for the specified compound_id"""
+
+        conn = sqlite3.connect('json.db')
+        print ("Opened database successfully")
+
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM compounds WHERE compound_id = ?", (num,))
+        compound_id = cursor.fetchall()
+        result = []
+        column = [desc[0] for desc in cursor.description]
+        for compound in compound_id:
+            compound = dict(zip(column, compound))
+            result.append(compound)
+        conn.close()
+        print(result)
+        return jsonify(result)
+
+
+@api.route("/compound/<int:num>/assay_results")
+@api.doc(params = {'num': 'A compound id'})
+class Compounds_id(Resource):
+    def get(self, num):
+
+        """Returns the list of assay_results for the specified compound_id"""
+
         conn = sqlite3.connect('json.db')
         print ("Opened database successfully")
 
