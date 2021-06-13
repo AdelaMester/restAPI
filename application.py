@@ -105,6 +105,22 @@ class Compounds_id(Resource):
         return jsonify("Update done")
 
 
+    def delete(self, num):
+
+        """DELETE the details for the specified compound_id"""
+
+        compound_id = num
+        conn = sqlite3.connect('json.db')
+        print ("Opened database successfully")
+
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM compounds WHERE compound_id=?", (compound_id,))
+        cursor.execute("DELETE FROM assay_results WHERE compound_id=?", (compound_id,))
+        conn.commit()
+        conn.close()
+        return jsonify("Deleted")
+
+
 @api.route("/compound/<int:num>/assay_results")
 @api.doc(params = {'num': 'A compound id'})
 class Compounds_id(Resource):
