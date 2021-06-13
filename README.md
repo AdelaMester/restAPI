@@ -3,11 +3,11 @@ Exscientia code challenge: create Rest API and save json to database.
 
 ## The high picture of the API
 
-| Routes                      | GET           | POST  | PUT          | DELETE     |
-| --------------------------- |:-------------:| -----:|------------- |:----------:|
-| /compounds                  | - [x]         |       |              |            |
-| /compound/<id>              | - [x]         | - [x] | - [x]        | - [x]      |
-| /compound/<id>/assay_results| - [x]         |       |              |            |
+| Routes                      | GET                            | POST  | PUT          | DELETE     |
+| --------------------------- |:----------                 ---:| -----:|------------- |:----------:|
+| /compounds                  | <ul><li>- [x] </li><li>        |       |              |            |
+| /compound/<id>              | <ul><li>- [x] </li><li>        | - [x] | - [x]        | - [x]      |
+| /compound/<id>/assay_results| <ul><li>- [x] </li><li>        |       |              |            |
 
 SWAGGER available at [Heroku](https://exscientia.herokuapp.com/)
 
