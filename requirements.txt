@@ -1,1 +1,3 @@
+flask
 flask-restplus
+gunicorn==20.0.4
