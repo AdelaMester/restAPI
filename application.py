@@ -83,6 +83,28 @@ class Compounds_id(Resource):
         return jsonify(result)
 
 
+    def put(self, num):
+
+        """Updates the details for the specified compound_id"""
+
+        compound_id = num
+        smiles = request.json['smiles']
+        molecular_weight = request.json['molecular_weight']
+        ALogP = request.json['ALogP']
+        molecular_formula = request.json['molecular_formula']
+        num_rings = request.json['num_rings']
+        image = request.json['image']
+
+        conn = sqlite3.connect('json.db')
+        print ("Opened database successfully")
+
+        cursor = conn.cursor()
+        cursor.execute("UPDATE compounds SET smiles=?, molecular_weight=?, ALogP=?, molecular_formula=?, num_rings=?, image=? WHERE compound_id=?", (smiles, molecular_weight, ALogP, molecular_formula, num_rings, image, num))
+        conn.commit()
+        conn.close()
+        return jsonify("Update done")
+
+
 @api.route("/compound/<int:num>/assay_results")
 @api.doc(params = {'num': 'A compound id'})
 class Compounds_id(Resource):
