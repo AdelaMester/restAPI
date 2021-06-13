@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 import os
 import sqlite3
-#from werkzeug.utils import cached_property
 from flask_restplus import Api, Resource
 
 
