@@ -219,8 +219,8 @@ class Compounds_id(Resource):
         print ("Opened database successfully")
 
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM comp WHERE compound_id=?", (compound_id,))
-        cursor.execute("DELETE FROM assay_result WHERE compound_id=?", (compound_id,))
+        cursor.execute("DELETE FROM compounds WHERE compound_id=?", (compound_id,))
+        cursor.execute("DELETE FROM assay_results WHERE compound_id=?", (compound_id,))
         conn.commit()
         conn.close()
         return jsonify("Deleted")
