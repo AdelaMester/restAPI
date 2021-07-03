@@ -1,5 +1,5 @@
 # COMPOUNDS
-Exscientia code challenge: create Rest API and save json to database.
+Create Rest API and save json to database.
 
 ## The high picture of the API
 
