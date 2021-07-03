@@ -1,4 +1,5 @@
-# RESTAPI
+# COMPOUNDS
+
 Create Rest API and save json to database.
 
 ## The high picture of the API
@@ -9,7 +10,7 @@ Create Rest API and save json to database.
 | /compound/id                | <ul><li>- [x] </ul></li>       |<ul><li>- [x] </ul></li>| <ul><li>- [x] </ul></li>       | <ul><li>- [x] </ul></li>     |
 | /compound/<id>/assay_results| <ul><li>- [x] </ul></li>       |<ul><li>- [x] </ul></li>|<ul><li>- [x] </ul></li>        | <ul><li>- [x] </ul></li>     |
 
-SWAGGER available at [Heroku](https://exscientia.herokuapp.com/)
+SWAGGER available at [Heroku](https://restapiflask.herokuapp.com/)
 
 ## Install application
 ```pip3 install -r requirements.txt```
@@ -21,7 +22,7 @@ SWAGGER available at [Heroku](https://exscientia.herokuapp.com/)
 ```flask run```
 
 ## App deployed with Heroku
-[API link to Heroku](https://exscientia.herokuapp.com/)
+[API link to Heroku](https://restapiflask.herokuapp.com/)
 
 
 
